@@ -9,7 +9,7 @@ class Controller
     {
         $this->MODEL = new Modelo();
     }
-    public function recibir1()
+    public function iniciar()
     {
         //consulta de la busqueda
         $user = $_POST['Usuario'];

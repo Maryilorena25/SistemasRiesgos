@@ -1,28 +1,22 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/EmpHolding/conexion.php';
+//Conexion a la base de datos y consultas
+class Modelo
+{
 
-class Modelo {
-
-    private $dbHost = "127.0.0.1";
-    private $dbUser = "root";
-    private $dbPassword = "";
-    private $dbName = "sistema_riesgos";
-
-    private $conn;
+    public $CNX1;
 
     public function __construct()
     {
-        $this->conn = new PDO("mysql:host=$this->dbHost;dbname=$this->dbName", $this->dbUser, $this->dbPassword);
-        $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->CNX1 = conexionBD::sqlmenjhaler();
     }
-
-
-    public function iniciar ($Usuario, $Contrasenia){
-        $sql = "SELECT * FROM `usuarios` WHERE user='$Usuario' and pass='$Contrasenia'";
-        $sql = $this->conn->prepare($sql);
+    public function iniciar($Usuario, $Contrasenia)
+    {
+        $sql = "SELECT * FROM usuarios WHERE UsuCod='$Usuario' and UsuCla='$Contrasenia'";
+        $sql = $this->CNX1->prepare($sql);
         $sql->execute();
-        $row = $sql->fetch(PDO::FETCH_NAMED);
+        $row = $sql->fetchall(PDO::FETCH_NAMED);
         return $row;
     }
 }
-
 ?>
